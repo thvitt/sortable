@@ -93,9 +93,15 @@ sortable =
         rowArray.sort compare
         tBody.appendChild row[1] for row in rowArray
       else
-        rowArray.push item for item in tBody.rows
+        bottomArray = []
+        for row in tBody.rows
+          if type.bottom? and type.bottom(sortable.getNodeValue(row.cells[i]))
+            bottomArray.push row
+          else
+            rowArray.push row
         rowArray.reverse()
         tBody.appendChild row for row in rowArray
+        tBody.appendChild row for row in bottomArray
 
       if typeof window['CustomEvent'] is 'function'
         table.dispatchEvent?(new CustomEvent 'Sortable.sorted', { bubbles: true })
