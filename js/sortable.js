@@ -233,7 +233,9 @@
     }
   ]);
 
-  setTimeout(sortable.init, 0);
+  document.addEventListener("DOMContentLoaded", sortable.init);
+
+  setTimeout(0, sortable.init);
 
   if (typeof define === 'function' && define.amd) {
     define(function() {
